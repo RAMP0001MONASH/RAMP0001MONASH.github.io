@@ -1,12 +1,12 @@
 @font-face{
 font-family: MonospaceIBM;
-src: url(acplus_ibm_vga_8x16.ttf)
+src: url(../acplus_ibm_vga_8x16.ttf)
 /* original typeface don't forgetti*/
 }
 
 @font-face{
     font-family: MonospaceIBM2;
-    src: url(webplus_ibm_vga_9x16.woff)
+    src: url(../webplus_ibm_vga_9x16.woff)
     /* slightly wider to make the border work*/
 }
 
