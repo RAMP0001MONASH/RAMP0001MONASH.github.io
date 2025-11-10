@@ -1,305 +1,135 @@
-@font-face{
-font-family: MonospaceIBM;
-src: url(../acplus_ibm_vga_8x16.ttf)
-/* original typeface don't forgetti*/
+:root {
+  background-image:url("assets/froge-pattern-01.png") ;
+  --win:#C0C0C0;   /* grey */
+  --inset:#DFDFDF; /* inset border color */
+  --text:#000000;  /* text color */
+  --highlight:#E0E0E0; /* tab highlight */
 }
 
-@font-face{
-    font-family: MonospaceIBM2;
-    src: url(../webplus_ibm_vga_9x16.woff)
-    /* slightly wider to make the border work*/
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Microsoft Sans Serif', sans-serif;
+  font-size: 11px;
+  background: var(--bg);
+  margin: 0;
+  color: var(--text);
 }
 
-body{
-    
-    top: 0;
-    left: 0;
-    font-family: MonospaceIBM2;
-    background-color: black;
+/* Windows window */
+.winbox {
+  background: var(--win);
+  border: 2px outset var(--inset);
+  position: relative;
+  margin: 12px;
 }
 
-.welcome {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
+/* Drag bar */
+.winbox_header {
+  background: #000080;
   color: white;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+  padding: 4px 8px;
+  cursor: move;
+  user-select: none;
+}
+
+/* buttons */
+.aboutbox_button {
+  background: var(--win);
+  border: 2px outset var(--inset);
+  padding: 4px 6px;
+  margin: 4px 2px;
   cursor: pointer;
 }
 
-.welcome.visible {
+/* Left column */
+.aboutbox {
+  position: fixed;
+  top: 10%;
+  left: 50px;
+  width: 350px;
+  z-index: 15;
+}
+
+.aboutbigpfp{
+display: flex;
+justify-content: center;
+}
+
+/* Right posts column */
+.posts {
+  position: absolute;
+  left: 450px;
+  top: 30px;
+  width: calc(100% - 500px);
+}
+
+/* Post window */
+.postbox {
+  width: 540px;
+  margin-bottom: 22px;
+}
+
+.post-images-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* center images  */
+  margin: 10px 0;
+}
+
+.post-images {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
-.largetext{ 
-  text-align: center;
-  
-}
-.blinkers{
-  animation: blinker 1s linear infinite;
-}
-
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
-}
-
-
-/* this is a reference to a really funny show */
-.idiotbox {
-  position: fixed;  /* So we can place it top-right */
-  top: 0; 
-  right: 0;
-  z-index: 3;
-  display: block;
-  padding: 4px;  /* Tight padding between video and border */
-  border: 9px solid rgb(165, 142, 42);  /* CRT green border */
-  background: #000;  /* solid black behind video */
-  box-shadow: 0 0 10px rgb(165, 142, 42);  /* subtle glow */
-  width: 30vh;
-}
-
-.idiotbox video {
-  display: block;
-  width: 100%;  /* Control size */
+.post-images img {
+  flex: 1 1 calc(50% - 10px); /* if you use multiple images trouble shoot later */
+  max-width: 100%;
   height: auto;
-  opacity: 1;  /* Ensure no transparency */
-  filter: brightness(2) contrast(0.7);
-}
-.video-brighten-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(255, 255, 255, 0.1); /* subtle glow */
-  pointer-events: none;
-}
-
-.crt-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none !important; /*important tag makes it so that function wont be accidentally ignored */
-  z-index: 99999;
-
-  background:
-    /* Vignette (dark edges) */
-    radial-gradient(
-      ellipse at center,
-      rgba(0,0,0,0) 40%,
-      rgba(0,0,0,0.4) 80%,
-      rgba(0,0,0,0.6) 100%
-    ),
-    /* Glass glare */
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.05) 30%,
-      rgba(255,255,255,0.0) 30%,
-      rgba(255,255,255,0.02) 70%,
-      rgba(255,255,255,0.0) 70%
-    ),
-    /* Scanlines */
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0,0,0,0) 0px,
-      rgba(0,0,0,0.6) 4px,
-      rgba(0,0,0,0) 8px
-    ),
-    /* Faint green glow center */
-    radial-gradient(
-      circle at center,
-      rgba(0,255,0,0.08),
-      transparent 60%
-    );
-    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.9);
-
-  mix-blend-mode: overlay;
-  animation: flicker 1.5s infinite alternate;
-  filter: contrast(1.15) brightness(1.05);
-
-  /* CRT curvature */
-  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.7);
-  border-radius: 0%;
-
-  /* Optional: simulate slight screen bulge */
-  transform: perspective(800px) translateZ(0) scale(1.01);
-}
-
-
-@keyframes flicker {
-  0%   { opacity: 0.85; }
-  50%  { opacity: 0.9; }
-  100% { opacity: 0.85; }
-}
-/* overlay codde courtesy of chat gpt */
-/* all the structural stuff is me, Uriah's videos and youtube videos. */
-
-
-    
-div.border{white-space: pre;
-    pointer-events: none !important;
-    /* pre preserves spacing and line return*/
-    /* THIS SHIT -PROBABLY- ONLY WORKS ON STANDARD ASPECT RATIO MONITORS AND SMALL MONITORS DONT WORK EITHER*/
-    position: fixed;
-    /* pins border to the top visually */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    /* resizing and stuff should hold up but bottom becomes detached*/
-    align-self: left;
-    font-family: MonospaceIBM2;
-    color: rgb(165, 142, 42);
-    background-color: rgba(0, 0, 0, 0.3);
-    text-align: left;
-    z-index: 2; 
-    overflow: hidden;
-    /* ^this handles layering use e.g: "top and right with a value" to schmove position or use transform commnad with 
-    the translate tag(?) with values to move it around as well consider "stacking context" (Z-index) higher value the futher up in context*/
-    /* maybe use CH value denomination to make it easier to align with the background*/
-    font-size: min(1vw);    
-}
-
-.flex-container {
-  position: fixed;
-  top: 7ch;
-  /* tweak manually if border sizing gets messed up*/
-  left: 15ch;     
-  right: 15ch;    
-  bottom: 4ch;    
-  display: flex;
-  flex-direction: row;
-  gap: 8ch;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  background: transparent;
-  overflow: hidden;
+  border-radius: 8px;
 }
 
 
 
-/* REMEMBER WHEN ADDING DIRECTIONAL COMMANDS TO THIS SECTION ALL THAT SHIT IS GOING TO BE REVERSED LEFT TO RIGHT */
-/* furhter note to self: DO NOT FUCKING TOUCH ANY OF THIS YOU WONT REMEBER HOW IT WORKS AND WHY THE ORDER IS LIKE THIS EXCERCISE CAUTION*/
-.textbox{ 
-    flex-shrink: 0;
-    /* 1 means smush 0 means no smush */
-    flex-grow: 0;
-    /* 1 means stretch 0 means stiff */
-    /* flex can have relative values meaning that some can shrink faster than others */
-    
-    color: lime;
-    width: 70vh;
-    height: 35vh;
-    background-color: rgba(0, 0, 0, 0); /*this is just for debugging*/
-    font-size: clamp(16px, 1.5vw, 32px);
-    position: relative;
-    top: -3.5vh;
-    /* clamp command for resizing */
-    padding-left: 60px;
-    margin-top: 2vh; 
-    overflow-y: scroll;
-    transform: scaleX(-1);
-    -webkit-mask-image: linear-gradient(to bottom,
-        transparent 0%,
-        black 10%,
-        black 90%,
-        transparent 100%);
-    mask-image: linear-gradient(to bottom,
-        transparent 0%,
-        black 10%,
-        black 90%,
-        transparent 100%);
-    /* ^the two above manage the shadowy overlay on top and bottom*/
-    line-height: 1.2em;
-    padding: 1rem
-    
+
+/* white content area */
+.post_content {
+  background: #fff;
+  border: 2px inset var(--inset);
+  padding: 10px;
+  min-height: 70px;
 }
 
-.textbox > * {
-    transform: scaleX(-1);  /* flip back */}/*asterisk makes it so that it targets textbox again or something I forgot but it's necesarry*/
-    /* the above nonsense is to put the scrollbar on the left for aestheic purposes */
-   
-    /* whole scrollbar */
-     .textbox::-webkit-scrollbar {
-    width: 8px;  
-    background-color: black; /* the track background */
-    }
-
-   .textbox::-webkit-scrollbar-button{
-    width: 10px;
-    color: lime;
-    background-color: black;
-   }
-   /*^this doesnt do anything really its jsut for covinent spacing*/
-    
-    .textbox::-webkit-scrollbar-thumb {/* slider */
-    background-color: limegreen; /* terminal green thumb */
-    border-radius: 0; /* no rounded corners — blocky look */
-    border: 1px solid black; /* pixel-like border */
-    }
-
-    /* The track  */
-    .textbox::-webkit-scrollbar-track {
-    background-color: black; /* match terminal bg */
-    border-right: 1px solid limegreen; /* optional: vertical line like a pixel gutter */
-    }
-/* ^end of scroll bar nonsense */
-
-
-.picbox{ 
-    
-  flex-shrink: 0;
-    /* 1 means smush 0 means no smush */
-  flex-grow: 0;
-    /* 1 means stretch 0 means stiff */
-    /* flex can have relative values meaning that some can shrink faster than others */
-  width: 22vw;
-  height: 22vw;
-  background-color: rgba(0, 0, 0, 0); /*this is just for debugging and alignment checks*
-    font-size: clamp(16px, 1vw, 32px);
-    /* clamp command for resizing text if any*/
-    direction: ltr;
-    flex-direction: column;
-    align-items: center;
-    gap: 3ch ;
-    justify-content:space-evenly ;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    box-sizing: border-box;
-  overflow-y: hidden; /* Remove scroll bar, no manual scroll */
-}
-    /* ^the two above manage the shadowy overlay on top and bottom*/
-   /* #box align self: ; use this to pin individual bits*/
-.picbox img{
-  width: 100%;  /* Make images scale within box */
-  height: auto;
-  display: block;
-  margin-bottom: 0.5rem;  /* Space between images */
-  scroll-snap-align: start;
+/* Tabs inside posts */
+.tabs {
+  background: var(--win);
+  border-bottom: 2px outset var(--inset);
+  padding: 4px 6px;
 }
 
+.tab {
+  padding: 3px 8px;
+  border: 2px outset var(--inset);
+  cursor: pointer;
+  margin-right: 4px;
+}
 
-.picbox::-webkit-scrollbar {
-    width: 8px;  
-    background-color: black; /* the track background */
-    }
+.tab.active {
+  border: 2px inset var(--inset);
+  background: var(--highlight);
+}
 
-    .picbox::-webkit-scrollbar-thumb {/* slider */
-    background-color: limegreen; /* terminal green thumb */
-    border-radius: 0; /* no rounded corners — blocky look */
-    border: 1px solid black; /* pixel-like border */
-    }
-    /* The track  */
-    .picbox::-webkit-scrollbar-track {
-    background-color: black; /* match terminal bg */
-    border-right: 1px solid limegreen; /* optional: vertical line like a pixel gutter */
-    }
-    /*if it looks like dookie or doesnt work as well maybe just pin scroll function to js or to each other so it works with video. scrolling site independantly is kinda werid*/
+.hidden { display: none; }
+
+/* Page switching */
+.page { display: none; }
+.page.active { display: block; }
+
+/* Mobile responsiveness you don't actually know what this does just trust AI for the time being and look at it on your phone later */ 
+@media(max-width:900px) {
+  .aboutbox { position: relative; left: 10px; top: 10px; width: auto; }
+  .posts { position: relative; left: 10px; width: auto; }
+  .postbox { width: auto; }
+}
